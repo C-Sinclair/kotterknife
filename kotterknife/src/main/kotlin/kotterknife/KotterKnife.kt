@@ -8,10 +8,15 @@ import android.app.DialogFragment
 import android.app.Fragment
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
+import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import android.support.v4.app.DialogFragment as SupportDialogFragment
 import android.support.v4.app.Fragment as SupportFragment
+
+object KotterKnife {
+    fun reset(target: Any) = LazyRegistry.reset(target)
+}
 
 fun <V : View> View.bindView(id: Int)
         : ReadOnlyProperty<View, V> = required(id, viewFinder)
@@ -155,10 +160,29 @@ private class Lazy<in T, out V>(private val initializer: (T, KProperty<*>) -> V)
     private var value: Any? = EMPTY
 
     override fun getValue(thisRef: T, property: KProperty<*>): V {
+        LazyRegistry.register(thisRef!!, this)
+
         if (value == EMPTY) {
             value = initializer(thisRef, property)
         }
+
         @Suppress("UNCHECKED_CAST")
         return value as V
+    }
+
+    fun reset() {
+        value = EMPTY
+    }
+}
+
+private object LazyRegistry {
+    private val lazyMap = WeakHashMap<Any, MutableCollection<Lazy<*, *>>>()
+
+    fun register(target: Any, lazy: Lazy<*, *>) {
+        lazyMap.getOrPut(target, { Collections.newSetFromMap(WeakHashMap()) }).add(lazy)
+    }
+
+    fun reset(target: Any) {
+        lazyMap[target]?.forEach { it.reset() }
     }
 }
