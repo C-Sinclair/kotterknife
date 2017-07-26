@@ -157,6 +157,20 @@ class ViewTest {
         assertEquals(2, example.name.count())
     }
 
+    @Test
+    fun testReset() {
+        class Example(context: Context) : FrameLayout(context) {
+            val name: View? by bindOptionalView(1)
+        }
+
+        val example = Example(InstrumentationRegistry.getContext())
+        example.addView(viewWithId(1))
+        assertNotNull(example.name)
+        example.removeAllViews()
+        KotterKnife.reset(example)
+        assertNull(example.name)
+    }
+
     private fun viewWithId(id: Int): View {
         val view = View(InstrumentationRegistry.getContext())
         view.id = id
