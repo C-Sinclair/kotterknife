@@ -6,18 +6,18 @@ Kotter Knife
 [Butter Knife][1]-esque view binding for Kotlin.
 
 ```kotlin
-public class PersonView(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
-  val firstName: TextView by bindView(R.id.first_name)
-  val lastName: TextView by bindView(R.id.last_name)
+class PersonView(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
+    val firstName: TextView by bindView(R.id.first_name)
+    val lastName: TextView by bindView(R.id.last_name)
 
-  // Optional binding.
-  val details: TextView? by bindOptionalView(R.id.details)
+    // Optional binding.
+    val details: TextView? by bindOptionalView(R.id.details)
 
-  // List binding.
-  val nameViews: List<TextView> by bindViews(R.id.first_name, R.id.last_name)
+    // List binding.
+    val nameViews: List<TextView> by bindViews(R.id.first_name, R.id.last_name)
 
-  // List binding with optional items being omitted.
-  val nameViews: List<TextView> by bindOptionalViews(R.id.first_name, R.id.middle_name, R.id.last_name)
+    // List binding with optional items being omitted.
+    val nameViews: List<TextView> by bindOptionalViews(R.id.first_name, R.id.middle_name, R.id.last_name)
 }
 ```
 
@@ -29,17 +29,21 @@ the support library `Fragment`, and recycler view's `ViewHolder`.
 Download
 --------
 
-Currently not available via Maven Central.
+Available on JitPack.
 
-A SNAPSHOT is available in the Sonatype snapshot repo.
+Add this to your repositories if you haven't already:
+
 ```groovy
-compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+maven { url 'https://jitpack.io' }
 ```
 
-You can also copy `ButterKnife.kt` into your source tree. The file depends on the 'support-v4' and
-'recyclerview-v7' libraries but the dependency is easily removed by deleting a few lines.
+The dependency:
+```groovy
+compile 'com.github.rubengees:kotterknife:1.0'
+```
 
-Comments, suggestions, and pull requests are encouraged!
+You can also copy `KotterKnife.kt` into your source tree. The file depends on the 'support-v4' and
+'recyclerview-v7' libraries but the dependency is easily removed by deleting a few lines.
 
 
 
