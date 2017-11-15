@@ -1,2 +1,4 @@
+before_install:
+  - unset ANDROID_NDK_HOME
 install:
-   - ./gradlew clean -xtest -xlint publishToMavenLocal
+  - ./gradlew clean -xtest -xlint publishToMavenLocal
