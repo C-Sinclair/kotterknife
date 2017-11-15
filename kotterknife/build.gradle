@@ -6,11 +6,10 @@ group = 'com.github.rubengees'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
@@ -33,13 +32,13 @@ android {
 }
 
 dependencies {
-    compile deps.kotlinStdlib
+    api deps.kotlinStdlib
 
-    compile deps.supportV4
-    compile deps.supportRecyclerView
+    api deps.supportV4
+    api deps.supportRecyclerView
 
-    androidTestCompile deps.supportTestRunner
-    androidTestCompile deps.supportTestRules
+    androidTestImplementation deps.supportTestRunner
+    androidTestImplementation deps.supportTestRules
 }
 
 task sourceJar(type: Jar) {

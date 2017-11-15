@@ -8,7 +8,8 @@ import android.app.DialogFragment
 import android.app.Fragment
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
-import java.util.*
+import java.util.Collections
+import java.util.WeakHashMap
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import android.support.v4.app.DialogFragment as SupportDialogFragment
@@ -42,7 +43,6 @@ fun <V : View> SupportFragment.bindView(id: Int)
 fun <V : View> ViewHolder.bindView(id: Int)
         : ReadOnlyProperty<ViewHolder, V> = required(id, viewFinder)
 
-
 fun <V : View> View.bindOptionalView(id: Int)
         : ReadOnlyProperty<View, V?> = optional(id, viewFinder)
 
@@ -67,7 +67,6 @@ fun <V : View> SupportFragment.bindOptionalView(id: Int)
 fun <V : View> ViewHolder.bindOptionalView(id: Int)
         : ReadOnlyProperty<ViewHolder, V?> = optional(id, viewFinder)
 
-
 fun <V : View> View.bindViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = required(ids, viewFinder)
 
@@ -91,7 +90,6 @@ fun <V : View> SupportFragment.bindViews(vararg ids: Int)
 
 fun <V : View> ViewHolder.bindViews(vararg ids: Int)
         : ReadOnlyProperty<ViewHolder, List<V>> = required(ids, viewFinder)
-
 
 fun <V : View> View.bindOptionalViews(vararg ids: Int)
         : ReadOnlyProperty<View, List<V>> = optional(ids, viewFinder)
