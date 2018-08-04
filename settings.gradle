@@ -1,1 +1,3 @@
 include ':kotterknife'
+
+enableFeaturePreview('STABLE_PUBLISHING')

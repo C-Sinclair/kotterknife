@@ -1,25 +1,26 @@
 buildscript {
     ext {
-        version = '1.1'
+        version = '2.0'
         versionCode = 1
         minSdkVersion = 14
-        targetSdkVersion = 26
-        compileSdkVersion = 26
+        targetSdkVersion = 28
+        compileSdkVersion = 28
 
-        androidPluginVersion = '3.0.0'
-        kotlinVersion = '1.1.60'
+        androidPluginVersion = '3.1.3'
+        kotlinVersion = '1.2.60'
 
-        supportLibraryVersion = '27.0.1'
+        androidXVersion = '1.0.0-beta01'
+        androidXTestVersion = '1.1.0-alpha4'
         supportTestVersion = '1.0.1'
 
         deps = [
-                kotlinStdlib       : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
 
-                supportV4          : "com.android.support:support-v4:$supportLibraryVersion",
-                supportRecyclerView: "com.android.support:recyclerview-v7:$supportLibraryVersion",
+                fragment    : "androidx.fragment:fragment:$androidXVersion",
+                recyclerView: "androidx.recyclerview:recyclerview:$androidXVersion",
 
-                supportTestRunner  : "com.android.support.test:runner:$supportTestVersion",
-                supportTestRules   : "com.android.support.test:rules:$supportTestVersion",
+                testRunner  : "androidx.test:runner:$androidXTestVersion",
+                testRules   : "androidx.test:rules:$androidXTestVersion",
         ]
     }
 
@@ -31,8 +32,12 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$androidPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
+
+apply plugin: 'base'
 
 allprojects {
     version = rootProject.ext.version
@@ -43,6 +48,6 @@ allprojects {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
+wrapper {
+    gradleVersion = '4.9'
 }
